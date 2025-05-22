@@ -23,7 +23,7 @@ export const checkUser = (req, res) => {
     res.status(200).json({ message: "Usuários captados", data: userData });
     console.log("Req get enviada: ", userData);
   } catch (err) {
-    res.status(500).json({ message: "server error" });
+    res.status(500).json({ message: "Server Error" });
     console.error(err);
   }
 };
@@ -40,7 +40,24 @@ export const checkUserById = (req, res) => {
     res.status(200).json({ message: "Usuário encontrado", data: user });
     console.log("Usuário encontrado:", user);
   } catch (err) {
-    res.status(500).json({ message: "Erro no servidor" });
+    res.status(500).json({ message: "Server Errorr" });
     console.error(err);
+  }
+};
+export const deleteUser = (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = userData.findIndex((u) => u.id === parseInt(userId));
+    if (!user === -1) {
+      console.log("Usuário não encontrado");
+      return res
+        .status(404)
+        .json({ message: "Usuário não encontrado para deletar" });
+    }
+    userData.splice(user, 1);
+    res.status(200).json({ message: "Usuário deletado" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server Error" });
   }
 };
