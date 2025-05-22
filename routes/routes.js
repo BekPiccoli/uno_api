@@ -1,4 +1,4 @@
-import { createUser, checkUser } from "../controller/user.js";
+import { createUser, checkUser, checkUserById } from "../controller/user.js";
 import { createTitulo, checkTitulo } from "../controller/titilo.js";
 
 export const routePost = (app) => {
@@ -7,5 +7,6 @@ export const routePost = (app) => {
 };
 export const routeGet = (app) => {
   app.get("/users/check", checkUser);
+  app.get("/users/check/:id", checkUserById);
   app.get("/titulo/check", checkTitulo);
 };
